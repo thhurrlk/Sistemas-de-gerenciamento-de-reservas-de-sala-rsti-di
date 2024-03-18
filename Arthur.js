@@ -95,19 +95,13 @@ function iniciarSistema() {
       }
     }
   }
-  
-  // Função para cadastrar uma nova sala
   function cadastrarSala(salas) {
     let numeroSala = prompt('Digite o número da sala:');
     let descricao = prompt('Digite a descrição da sala:');
-  
-    // Criar um objeto para representar a sala
     let novaSala = {
       numero: numeroSala,
       descricao: descricao
     };
-  
-    // Adicionar a nova sala ao array de salas
     salas.push(novaSala);
   
     // Atualizar os dados na sessão
@@ -131,7 +125,7 @@ function iniciarSistema() {
     }
   
     // Criar um objeto para representar a reserva
-    let novaReserva = {
+    let novaReserva = {git
       id: reservas.length + 1,
       numeroSala: numeroSala,
       data: data,
