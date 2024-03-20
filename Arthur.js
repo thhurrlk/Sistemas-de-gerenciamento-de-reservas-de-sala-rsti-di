@@ -65,13 +65,13 @@ console.log(dbQuartos) // Console log para testar como está a situação da dat
 
 ------------------------------------------------------------------------------------------------------------------------------------- */
 
-/* // Função para inicializar o sistema
+// Função para inicializar o sistema
 function iniciarSistema() {
-  // Verifica se já existem dados armazenados na sessão
-  let salas = JSON.parse(sessionStorage.getItem('salas')) || [];
-  let reservas = JSON.parse(sessionStorage.getItem('reservas')) || [];
-
-  while (true) {
+    // Verifica se já existem dados armazenados na sessão
+    let salas = JSON.parse(sessionStorage.getItem('salas')) || [];
+    let reservas = JSON.parse(sessionStorage.getItem('reservas')) || [];
+  
+    while (true) {
       let opcao = prompt('Escolha uma opção:\n1 - Cadastro de salas\n2 - Agendamento de reserva\n3 - Visualização de agendamentos\n4 - Gerenciamento de agendamentos\n5 - Sair');
 
       switch (opcao) {
@@ -220,171 +220,9 @@ function excluirAgendamento(reservas) {
       console.log('Agendamento excluído com sucesso!');
   } else {
       alert('Agendamento não encontrado!');
+    }
   }
-}
-
-// Iniciar o sistema ao carregar a página
-iniciarSistema(); */
-
-//-------------------------------------------------------------------------
-
-function iniciarSistema() {
-  // Verifica se já existem dados armazenados na sessão
-  let salas = JSON.parse(sessionStorage.getItem('salas')) || [];
-  let reservas = JSON.parse(sessionStorage.getItem('reservas')) || [];
-
-  while (true) {
-      let opcao = prompt('Escolha uma opção:\n1 - Cadastro de salas\n2 - Agendamento de reserva\n3 - Visualização de agendamentos\n4 - Gerenciamento de agendamentos\n5 - Sair');
-
-      switch (opcao) {
-          case '1':
-              cadastrarSala(salas);
-              break;
-          case '2':
-              agendarReserva(salas, reservas);
-              break;
-          case '3':
-              visualizarAgendamentos(reservas);
-              break;
-          case '4':
-              gerenciarAgendamentos(reservas);
-              break;
-          case '5':
-              console.log('Saindo do sistema...');
-              return;
-          default:
-              alert('Opção inválida! Por favor, escolha uma opção válida.');
-      }
-  }
-}
-
-// Função para cadastrar uma sala
-function cadastrarSala(salas) {
-  let numeroSala = prompt('Digite o número da sala:');
-  let descricao = prompt('Digite a descrição da sala:');
-  let novaSala = {
-      numero: numeroSala,
-      descricao: descricao
-  };
-  salas.push(novaSala);
-
-  // Atualizar os dados na sessão
-  sessionStorage.setItem('salas', JSON.stringify(salas));
-
-  console.log('Sala cadastrada com sucesso!');
-}
-
-// Função para agendar uma reserva
-function agendarReserva(salas, reservas) {
-  let numeroSala = prompt('Digite o número da sala:');
-  let data = prompt('Digite a data da reserva (dd/mm/aaaa):');
-  let hora = prompt('Digite a hora da reserva (hh:mm):');
-
-  // Verificar se a sala está cadastrada
-  let salaEncontrada = salas.find(sala => sala.numero === numeroSala);
-
-  if (!salaEncontrada) {
-      alert('Sala não encontrada! Por favor, verifique o número da sala.');
-      return;
-  }
-
-  // Criar um objeto para representar a reserva
-  let novaReserva = {
-      id: reservas.length + 1,
-      numeroSala: numeroSala,
-      data: data,
-      hora: hora
-  };
-
-  // Adicionar a nova reserva ao array de reservas
-  reservas.push(novaReserva);
-
-  // Atualizar os dados na sessão
-  sessionStorage.setItem('reservas', JSON.stringify(reservas));
-
-  console.log('Reserva agendada com sucesso!');
-}
-
-// Função para visualizar os agendamentos
-function visualizarAgendamentos(reservas) {
-  console.log('Lista de agendamentos:');
-  reservas.forEach(reserva => {
-      console.log(`ID: ${reserva.id}, Sala: ${reserva.numeroSala}, Data: ${reserva.data}, Hora: ${reserva.hora}`);
-  });
-}
-
-// Função para gerenciar os agendamentos (buscar, editar, excluir)
-function gerenciarAgendamentos(reservas) {
-  let opcao = prompt('Escolha uma opção:\n1 - Buscar agendamento por ID\n2 - Editar agendamento\n3 - Excluir agendamento');
-
-  switch (opcao) {
-      case '1':
-          buscarAgendamentoPorId(reservas);
-          break;
-      case '2':
-          editarAgendamento(reservas);
-          break;
-      case '3':
-          excluirAgendamento(reservas);
-          break;
-      default:
-          alert('Opção inválida! Por favor, escolha uma opção válida.');
-  }
-}
-
-// Função para buscar um agendamento por ID
-function buscarAgendamentoPorId(reservas) {
-  let id = prompt('Digite o ID do agendamento:');
-  let agendamento = reservas.find(reserva => reserva.id === parseInt(id));
-
-  if (agendamento) {
-      console.log('Agendamento encontrado:');
-      console.log(`ID: ${agendamento.id}, Sala: ${agendamento.numeroSala}, Data: ${agendamento.data}, Hora: ${agendamento.hora}`);
-  } else {
-      alert('Agendamento não encontrado!');
-  }
-}
-
-// Função para editar um agendamento
-function editarAgendamento(reservas) {
-  let id = prompt('Digite o ID do agendamento que deseja editar:');
-  let index = reservas.findIndex(reserva => reserva.id === parseInt(id));
-
-  if (index !== -1) {
-      let novaData = prompt('Digite a nova data da reserva (dd/mm/aaaa):');
-      let novaHora = prompt('Digite a nova hora da reserva (hh:mm):');
-
-      // Atualizar os dados do agendamento
-      reservas[index].data = novaData;
-      reservas[index].hora = novaHora;
-
-      // Atualizar os dados na sessão
-      sessionStorage.setItem('reservas', JSON.stringify(reservas));
-
-      console.log('Agendamento editado com sucesso!');
-  } else {
-      alert('Agendamento não encontrado!');
-  }
-}
-
-// Função para excluir um agendamento
-function excluirAgendamento(reservas) {
-  let id = prompt('Digite o ID do agendamento que deseja excluir:');
-  let index = reservas.findIndex(reserva => reserva.id === parseInt(id));
-
-  if (index !== -1) {
-      // Remover o agendamento do array
-      reservas.splice(index, 1);
-
-      // Atualizar os dados na sessão
-      sessionStorage.setItem('reservas', JSON.stringify(reservas));
-
-      console.log('Agendamento excluído com sucesso!');
-  } else {
-      alert('Agendamento não encontrado!');
-  }
-}
-
-// Iniciar o sistema ao carregar a página
-iniciarSistema(); 
-
+  
+  // Iniciar o sistema ao carregar a página
+  iniciarSistema();
+  
