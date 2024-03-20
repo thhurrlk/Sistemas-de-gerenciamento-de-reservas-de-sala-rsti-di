@@ -1,0 +1,12 @@
+{
+    "quartos": [
+        {"id": 1,
+        "tipo": "Comum",
+        "descricao": "Quarto Comum: Simples e confortável."
+      },
+      {"id": 2,
+      "tipo": "Comum",
+      "descricao": "Quarto Comum: Simples e confortável."
+    }
+    ]
+  }
