@@ -16,8 +16,9 @@ function menuInicial(){
       }
     }
   }
+  console.log(menuInicial());
   
-  function iniciarSistemaCliente() {
+  /*function iniciarSistemaCliente() {
     while (true) {
       let opcao = prompt('Escolha uma opção:\n1 - Agendamento de reserva \n2 - Gerenciamento de agendamentos\n3 - Sair');
       switch (opcao) {
@@ -61,4 +62,4 @@ function menuInicial(){
     }
   }
   
-  menuInicial();  
+ console.log(menuInicial());*/

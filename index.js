@@ -49,7 +49,7 @@ console.log (dataFinal); */
 
 
 
-function digitarDataInicial (ano,mes,dia,hora,minuto){ //função para receber data e hora do início da reserva 
+/*function digitarDataInicial (ano,mes,dia,hora,minuto){ //função para receber data e hora do início da reserva 
     mes=mes-1 //porque 0 é jan e 11 é dez
     var data=new Date (ano,mes,dia,hora,minuto) //Cria uma instância de data
     data.getFullYear(ano); //retorna o ano da data especificada 

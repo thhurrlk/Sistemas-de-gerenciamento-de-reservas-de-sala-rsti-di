@@ -66,7 +66,7 @@ console.log(dbQuartos) // Console log para testar como está a situação da dat
 ------------------------------------------------------------------------------------------------------------------------------------- */
 
 // Função para inicializar o sistema
-function iniciarSistema() {
+/*function iniciarSistema() {
     // Verifica se já existem dados armazenados na sessão
     let salas = JSON.parse(sessionStorage.getItem('salas')) || [];
     let reservas = JSON.parse(sessionStorage.getItem('reservas')) || [];
@@ -222,5 +222,5 @@ function iniciarSistema() {
   }
   
   // Iniciar o sistema ao carregar a página
-  iniciarSistema();
+  iniciarSistema();*/
   
