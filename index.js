@@ -1,50 +1,5 @@
 //este arquivo index.js é o do CRISTIAN
 
-/* function digitarData (texto){
-//var texto='Início'
-//var textoFin='Final'
-var ano=prompt(`Digite o ANO do ${texto} da reserva`) 
-var mes=prompt(`Digite o MÊS do ${texto} da reserva`)
-mes=mes-1 //porque 0 é jan e 11 é dez
-var dia=prompt(`Digite o DIA do ${texto} da reserva`)
-var hora=prompt(`Digite a HORA do ${texto} da reserva`)
-var minuto=prompt(`Digite o MINUTO do ${texto} da reserva`) //mover as variáves e/ou prompts para fora da função!?
-var data=new Date (ano,mes,dia,hora,minuto)
-data.getFullYear(ano)
-data.setMonth(mes);
-data.setDate(dia)
-data.setHours(hora)
-data.setMinutes(minuto)
-//console.log(data)
-//if (mes='Mar') {console.log('Março')} //continuar criando para cada mês (NÃO PRECISA MAIS!!!)
-let diaSem = data.getDay(data)
-//if (diaSem=1){console.log('Segunda-feira')} ///continuar criando para cada dia da semana (NÃO PRECISA MAIS!!!)
-//criar um console.log com a data em português
-//console.log(diaSem)
-//var outraData=new Date (2024,2,18,10,0) //apagar?
-//console.log(outraData) //apagar?
-//if (outraData>data){console.log('depois')} //criar uma função para comparar horários de reservas (outra função? mover para fora desta?)
-const diaDaSemana = diaDaSemanaPorExtenso(data);
-console.log(diaDaSemana);
-console.log(data.toLocaleDateString('pt-BR'));
-console.log(data.toLocaleTimeString('pt-BR'));
-
-        function diaDaSemanaPorExtenso(data) {
-            const diasDaSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
-            return diasDaSemana[diaSem];
-        }
- return data ;
-};
-
-function digDataInicial(){digitarData('INÍCIO')} ;
-function digDataFinal(){digitarData('FINAL')};
-var dataInicial=digDataInicial();
-var dataFinal=digDataFinal();
-console.log (dataInicial);
-console.log (dataFinal); */
-//criar outra função para o horário final da reserva (copiar,colar e editar a função acima)
-
-//acima, a primeira versão da função (poderá ser apagada depois) ^^^^^^^^^^^--------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------
 var dataInicial=0
@@ -76,8 +31,8 @@ function checkIn () {
         data.setDate(dia); //atribui o dia do mês pra uma data específica
         data.setHours(hora); //atribui as horas para uma data especificada
         data.setMinutes(minuto); //atribui os minutos para uma data específica
-        return data ; //resultado da função para ser usada depois no objeto 'reseva' no formato completo de data (Tue Mar 19 2024 18:48:23 GMT-0300 (GMT-03:00))
-        //...ou usar dataInicial (ver abaixo), fazer um return de dataInicial no final da função checkIn???     
+        return data ; //resultado da função para ser usada depois no objeto 'reseva' no formato completo de data, NÃO!... (Tue Mar 19 2024 18:48:23 GMT-0300 (GMT-03:00))
+        //...ou usar dataInicial (ver abaixo), fazer um return de dataInicial no final da função checkIn??? SIM!!! FOI FEITO ISSO 
     };
         
         
@@ -89,6 +44,16 @@ function checkIn () {
         
     var dataInicial=digitarDataInicial(ano,mes,dia,hora,minuto); //cria a variável dataInicial a partir da função e dos dados digitados pelo usuário
     //console.log (dataInicial); //exibe a data inicial no formato completo (é só pra teste, pode-se apagar esta linha depois)
+
+        //APAGAR ESSA LINHA ABAIXO DEPOIS var horaTesteIni
+        var horaTesteIni=new Date (2024,3-1,21,7,0) //var de horário inicial de reserva existente para teste. Deverá procurar horários do mesmo quarto no banco de dados
+        //
+        
+        while(reservas[1].horaInicial>=horaTesteIni && reservas[1].horaInicial<=horaTesteFin) //acho que este comando deverá estar dentro de checkin (TROCAR O if POR while DAÍ!!!)
+        {console.log(`Selecione um horário de início antes de ${horaTesteIni} ou após ${horaTesteFin}`)} //alterar data e hora para formato BR 
+        //o início da nova reserva deverá ser ANTES DO INÍCIO ou APÓS O FINAL de uma EXISTENTE do mesmo quarto
+        //deverá ser usado um comando 'for' para percorrer os horários de início e fim de todas as reservas EXISTENTES do mesmo quarto
+
         
     function diaDaSemanaPorExtenso(dataInicial) { //função (dentro da função) para transformar o número do dia da semana em texto
             const diasDaSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
@@ -101,17 +66,14 @@ function checkIn () {
     var horaBR=(dataInicial.toLocaleTimeString('pt-BR')); //variável com a hora no formato hh:mm:ss para ser exibida ao usuário
     console.log(`Sua reserva inicia no(a) ${diaDaSemana}, ${dataBR}, às ${horaBR}`) //exibe a data e hora do início da reserva
     return dataInicial; //retorna o resultado da função para depois passar para a variável
-    //criar uma função mãe com tudo isso acima dentro, inclusive 'digitarDataInicial'!? acho q sim!
+    //criar uma função mãe com tudo isso acima dentro, inclusive 'digitarDataInicial'!? acho q sim! FOI FEITO
 } //final da function checkIn
     
-    //checkIn()
-    //var dataInicial =checkIn(); //passa o resultado da função para a variável
-    //console.log (dataInicial); //exibe a data inicial no formato completo (é só pra teste, pode-se apagar esta linha depois)
-
+    
 //-------------------------------------------------------------------------------
 
-    //criar aqui a function checkout (que é uma cópia da checkin)
-    //Na função 'digitarDataFinal' foi mudado o nome de 'data' para 'dataFinal'. Precisa mudar os nomes de todas as var dentro da função ??? acho q não!)
+    //aqui abaixo, a function checkout (que é uma praticamente cópia da checkin)
+    //Na função 'digitarDataFinal' foi mudado o nome de 'data' para 'dataFinal'. Precisa mudar os nomes de todas as var dentro da função ??? acho q não! SÓ FORAM MUDADAS ALGUMAS)
 function checkOut () {
         function digitarDataFinal (ano,mes,dia,hora,minuto){ //função para receber data e hora do final da reserva 
             mes=mes-1 //porque 0 é jan e 11 é dez
@@ -146,33 +108,15 @@ function checkOut () {
         var horaBRFinal=(dataFinal.toLocaleTimeString('pt-BR')); //variável com a hora no formato hh:mm:ss para ser exibida ao usuário
         console.log(`Sua reserva termina no(a) ${diaDaSemanaFinal}, ${dataBRFinal}, às ${horaBRFinal}`) //exibe a data e hora do final da reserva
         return dataFinal; //retorna o resultado da função para depois passar para a variável
-        //criar uma função mãe com tudo isso acima dentro, inclusive 'digitarDataFinal'!? acho q sim!
+        //criar uma função mãe com tudo isso acima dentro, inclusive 'digitarDataFinal'!? acho q sim! FOI FEITO
 } //final da function checkOut
     
-//checkOut()
-//var dataFinal =checkOut(); //passa o resultado da função para a variável
-//console.log (dataFinal); //exibe a data inicial no formato completo (é só pra teste, pode-se apagar esta linha depois)
-
-//-------------------------------------------------------------------------------------
-
-  /*   var idRes=0 //variável que será um número único para identificar uma reserva
-    function novoIdRes() { //função para perguntar se o usuário quer criar uma reserva, incrementa o idRes e chama a função novaReserva 
-        var desejaRes=prompt ("Deseja realizar uma nova reserva? Digite 's' ou 'S' para SIM ou qualquer tecla para cancelar")
-        if (desejaRes==='s' || desejaRes==='S') {idRes=idRes+1; //incrementa o idRes do objeto reserva e...
-        checkIn()
-        checkOut()
-        
-        //novaReserva () //... INICIA A RESERVA (ou alguém já fez isso?). executar a partir daqui a manipulação do array de reservas?
-        } 
-        else {} //executar aqui uma função ou voltar ao menu anterior
-    return idRes
-    }
-    idRes=novoIdRes() */
+  
 //-------------------------------------------------------------------------------------
     
     var reservas=[ //array q vai armazenar os objetos das reservas (ou substituir por uma classe do Rafael)
     { 
-        // reservas[0], será a inicial zerada que será usada para criar as novas (ignorar isso)
+        
         numeroReserva: 0,
         numeroQuarto: 0, // 
         horaInicial: 0, //
@@ -212,8 +156,9 @@ console.log(reservas[1].horaFinal) //exibe o horário final de reserva digitado 
 console.log('Hora teste inicial',horaTesteIni) //exibe o horário inicial de reserva EXISTENTE teste (é só pra teste, pode-se apagar esta linha depois)
 console.log('Hora teste final',horaTesteFin) //exibe o horário final de reserva EXISTENTE teste (é só pra teste, pode-se apagar esta linha depois)
 
-if(reservas[1].horaInicial>=horaTesteIni && reservas[1].horaInicial<=horaTesteFin) //acho que este comando deverá estar dentro de checkin (TROCAR O if POR while DAÍ!!!)
-{console.log(`Selecione um horário de início antes de ${horaTesteIni} ou após ${horaTesteFin}`)} //alterar data e hora para formato BR 
+/* if(reservas[1].horaInicial>=horaTesteIni && reservas[1].horaInicial<=horaTesteFin) //acho que este comando deverá estar dentro de checkin (TROCAR O if POR while DAÍ!!!)
+{console.log(`Selecione um horário de início antes de ${horaTesteIni} ou após ${horaTesteFin}`)}  */
+//alterar data e hora para formato BR 
 //o início da nova reserva deverá ser ANTES DO INÍCIO ou APÓS O FINAL de uma EXISTENTE do mesmo quarto
 //deverá ser usado um comando 'for' para percorrer os horários de início e fim de todas as reservas EXISTENTES do mesmo quarto
 
@@ -225,18 +170,9 @@ if((reservas[1].horaFinal>=horaTesteIni && reservas[1].horaInicial<=horaTesteFin
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-    //abaixo a 1a versão do objeto reserva
-    /* var reserva={ //objeto q vai armazenar uma reserva
-        idReserva: [0], //acho q aí deve haver um array q vai incrementando a medida que as reservas vão sendo criadas (ver como fazer), puxar da função idRes?
-        numeroQuarto: Quarto.id, //puxa do objeto 'Quarto' do Rafael (ver como fazer)
-        horaInicial: dataInicial, //puxa da função 'digitarDataInicial' ou uma acima dela (ver como fazer)
-        horaFinal: dataFinal//criar ainda uma função para o final da reserva (fazer uma cópia de 'digitarDataInicial', chamar de 'digitarDataFinal' e mudar o nome de 'data' para 'dataFinal'. Precisa mudar os nomes de todas as var dentro da função ??? acho q não!)
-    }
-    reserva.idReserva=idRes */ //salva o novo idRes da função no objeto
     
     
     
-    //criar uma função para comparar os horários de diferentes reservas para evitar conflitos de agenda!!!s
     
     //objeto do Rafael (somente para consultar os nomes dos parâmetros e poder repetí-los no objeto 'reserva')
     /* class Quarto {
