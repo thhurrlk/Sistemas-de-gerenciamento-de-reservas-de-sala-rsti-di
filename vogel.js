@@ -55,7 +55,7 @@ function iniciarSistemaCliente() {
           break;
         case '5':
           console.log('Saindo do sistema...');
-          return;
+        // criar uma funçao para sair do sistema;
         default:
           alert('Opção inválida! Por favor, escolha uma opção válida.');
       }
