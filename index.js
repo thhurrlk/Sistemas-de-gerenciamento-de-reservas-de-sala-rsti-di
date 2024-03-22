@@ -36,21 +36,41 @@ function checkIn () {
     };
         
         
-    var ano=prompt(`Digite o ANO do INÍCIO da reserva`) ; //prompts seguintes para o usuário digitar a data e a hora inicial da reserva
-    var mes=prompt(`Digite o MÊS do INÍCIO da reserva`);
-    var dia=prompt(`Digite o DIA do INÍCIO da reserva`);
-    var hora=prompt(`Digite a HORA do INÍCIO da reserva`);
-    var minuto=prompt(`Digite o MINUTO do INÍCIO da reserva`)   
-        
+    var ano=0
+    var mes=0
+    var dia=0
+    var hora=0
+    var minuto=0
+    
+    //function promptUser () {
+    ano=prompt(`Digite o ANO do INÍCIO da reserva`) ; //prompts seguintes para o usuário digitar a data e a hora inicial da reserva
+    mes=prompt(`Digite o MÊS do INÍCIO da reserva`);
+    dia=prompt(`Digite o DIA do INÍCIO da reserva`);
+    hora=prompt(`Digite a HORA do INÍCIO da reserva`);
+    minuto=prompt(`Digite o MINUTO do INÍCIO da reserva`)   
+//digitarDataInicial()    
+//}
+    //promptUser ()
     var dataInicial=digitarDataInicial(ano,mes,dia,hora,minuto); //cria a variável dataInicial a partir da função e dos dados digitados pelo usuário
     //console.log (dataInicial); //exibe a data inicial no formato completo (é só pra teste, pode-se apagar esta linha depois)
 
         //APAGAR ESSA LINHA ABAIXO DEPOIS var horaTesteIni
-        var horaTesteIni=new Date (2024,3-1,21,7,0) //var de horário inicial de reserva existente para teste. Deverá procurar horários do mesmo quarto no banco de dados
-        //
+        var horaTesteIni=new Date (2024,3-1,21,7,0); //var de horário inicial de reserva existente para teste. Deverá procurar horários do mesmo quarto no banco de dados
+        var dataBRTesteIni=(horaTesteIni.toLocaleDateString('pt-BR'));
+        var horaBRTesteIni=(horaTesteIni.toLocaleTimeString('pt-BR'));
         
-        while(reservas[1].horaInicial>=horaTesteIni && reservas[1].horaInicial<=horaTesteFin) //acho que este comando deverá estar dentro de checkin (TROCAR O if POR while DAÍ!!!)
-        {console.log(`Selecione um horário de início antes de ${horaTesteIni} ou após ${horaTesteFin}`)} //alterar data e hora para formato BR 
+        var horaTesteFin=new Date (2024,3-1,21,12,0);
+        var dataBRTesteFin=(horaTesteFin.toLocaleDateString('pt-BR'));
+        var horaBRTesteFin=(horaTesteFin.toLocaleTimeString('pt-BR'));
+        //APAGAR ESSA LINHA ACIMA DEPOIS var horaTesteFin
+        
+        //corrigir abaaixo para não virar um looping infinito
+        //if dataInicial>=horaTesteIni && dataInicial<=horaTesteFin true false
+        while(dataInicial>=horaTesteIni && dataInicial<=horaTesteFin) //acho que este comando deverá estar dentro de checkin (TROCAR O if POR while DAÍ!!!)
+        {console.log(`Selecione um horário de início antes das ${horaBRTesteIni} do dia ${dataBRTesteIni} ou após às ${horaBRTesteFin} do dia ${dataBRTesteFin}`);
+        //promptUser ()
+        } 
+        //alterar data e hora para formato BR 
         //o início da nova reserva deverá ser ANTES DO INÍCIO ou APÓS O FINAL de uma EXISTENTE do mesmo quarto
         //deverá ser usado um comando 'for' para percorrer os horários de início e fim de todas as reservas EXISTENTES do mesmo quarto
 
@@ -64,7 +84,7 @@ function checkIn () {
     const diaDaSemana = diaDaSemanaPorExtenso(dataInicial); //cria a variável com o nome do dia da semana por extenso a partir do resultado da função para depois ser exibido ao usuário
     var dataBR=(dataInicial.toLocaleDateString('pt-BR')); //variável com a data no formato dd/mm/aaaa para ser exibida ao usuário
     var horaBR=(dataInicial.toLocaleTimeString('pt-BR')); //variável com a hora no formato hh:mm:ss para ser exibida ao usuário
-    console.log(`Sua reserva inicia no(a) ${diaDaSemana}, ${dataBR}, às ${horaBR}`) //exibe a data e hora do início da reserva
+    console.log(`Sua reserva inicia no(a) ${diaDaSemana}, ${dataBR}, às ${horaBR}`); //exibe a data e hora do início da reserva
     return dataInicial; //retorna o resultado da função para depois passar para a variável
     //criar uma função mãe com tudo isso acima dentro, inclusive 'digitarDataInicial'!? acho q sim! FOI FEITO
 } //final da function checkIn
