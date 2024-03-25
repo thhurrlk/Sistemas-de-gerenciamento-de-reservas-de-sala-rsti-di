@@ -36,22 +36,23 @@ function checkIn () {
     };
         
         
-    var ano=0
+    /* var ano=0
     var mes=0
     var dia=0
     var hora=0
-    var minuto=0
+    var minuto=0 */
     
     //function promptUser () {
-    ano=prompt(`Digite o ANO do INÍCIO da reserva`) ; //prompts seguintes para o usuário digitar a data e a hora inicial da reserva
-    mes=prompt(`Digite o MÊS do INÍCIO da reserva`);
-    dia=prompt(`Digite o DIA do INÍCIO da reserva`);
-    hora=prompt(`Digite a HORA do INÍCIO da reserva`);
-    minuto=prompt(`Digite o MINUTO do INÍCIO da reserva`)   
+        var ano=prompt(`Digite o ANO do INÍCIO da reserva`) ; //prompts seguintes para o usuário digitar a data e a hora inicial da reserva
+        var mes=prompt(`Digite o MÊS do INÍCIO da reserva`);
+        var dia=prompt(`Digite o DIA do INÍCIO da reserva`);
+        var hora=prompt(`Digite a HORA do INÍCIO da reserva`);
+        var minuto=prompt(`Digite o MINUTO do INÍCIO da reserva`)   
 //digitarDataInicial()    
 //}
     //promptUser ()
-    var dataInicial=digitarDataInicial(ano,mes,dia,hora,minuto); //cria a variável dataInicial a partir da função e dos dados digitados pelo usuário
+    //var dataInicial= (0,0,0,0,0) // não funcionou para zerar a data no looping
+    dataInicial=digitarDataInicial(ano,mes,dia,hora,minuto); //cria a variável dataInicial a partir da função e dos dados digitados pelo usuário
     //console.log (dataInicial); //exibe a data inicial no formato completo (é só pra teste, pode-se apagar esta linha depois)
 
         //APAGAR ESSA LINHA ABAIXO DEPOIS var horaTesteIni
@@ -66,10 +67,27 @@ function checkIn () {
         
         //corrigir abaaixo para não virar um looping infinito
         //if dataInicial>=horaTesteIni && dataInicial<=horaTesteFin true false
-        while(dataInicial>=horaTesteIni && dataInicial<=horaTesteFin) //acho que este comando deverá estar dentro de checkin (TROCAR O if POR while DAÍ!!!)
-        {console.log(`Selecione um horário de início antes das ${horaBRTesteIni} do dia ${dataBRTesteIni} ou após às ${horaBRTesteFin} do dia ${dataBRTesteFin}`);
+        if(dataInicial>=horaTesteIni && dataInicial<=horaTesteFin) //acho que este comando deverá estar dentro de checkin (TROCAR O if POR while DAÍ!!!)
+        {alert(`Selecione um horário de início antes das ${horaBRTesteIni} do dia ${dataBRTesteIni} ou após às ${horaBRTesteFin} do dia ${dataBRTesteFin}`);
+    
+    
+        //dataInicial=0
         //promptUser ()
-        } 
+        
+
+        //dataInicial= (0,0,0,0,0) NÃO FUNCIONOU PARA ZERAR A DATA
+        checkIn () //O if SÓ FUNCIONOU ASSIM! PORÉM ELE NÃO SALVA A NOVA DATA DIGITADA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //COMO FAÇO PRA ZERAR DE NOVO A DATA???????????????????????????????????????????????????
+
+
+
+        //digitarDataInicial (ano,mes,dia,hora,minuto);
+        /* ano=prompt(`Digite o ANO do INÍCIO da reserva`) ; //prompts seguintes para o usuário digitar a data e a hora inicial da reserva EM CASO DE HORÁRIO OCUPADO
+        mes=prompt(`Digite o MÊS do INÍCIO da reserva`);
+        dia=prompt(`Digite o DIA do INÍCIO da reserva`);
+        hora=prompt(`Digite a HORA do INÍCIO da reserva`);
+        minuto=prompt(`Digite o MINUTO do INÍCIO da reserva`)  */ 
+        } //else{checkOut}
         //alterar data e hora para formato BR 
         //o início da nova reserva deverá ser ANTES DO INÍCIO ou APÓS O FINAL de uma EXISTENTE do mesmo quarto
         //deverá ser usado um comando 'for' para percorrer os horários de início e fim de todas as reservas EXISTENTES do mesmo quarto
@@ -79,7 +97,7 @@ function checkIn () {
             const diasDaSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
             return diasDaSemana[diaSem]; //diaSem é um número de 0 a 6 dado por getDay
         }
-        
+    dataInicial=digitarDataInicial(ano,mes,dia,hora,minuto);    
     let diaSem = dataInicial.getDay(dataInicial) //getDay retorna o dia da semana para a data especificada (número de 0 a 6, sendo 0 o domingo) e passa para a var para ser usado na função que retora o nome do dia da semana
     const diaDaSemana = diaDaSemanaPorExtenso(dataInicial); //cria a variável com o nome do dia da semana por extenso a partir do resultado da função para depois ser exibido ao usuário
     var dataBR=(dataInicial.toLocaleDateString('pt-BR')); //variável com a data no formato dd/mm/aaaa para ser exibida ao usuário
@@ -116,7 +134,17 @@ function checkOut () {
             
         var dataFinal=digitarDataFinal(ano,mes,dia,hora,minuto); //cria a variável dataFinal a partir da função e dos dados digitados pelo usuário
         //console.log (dataFinal); //exibe a data final no formato completo (é só pra teste, pode-se apagar esta linha depois)
-            
+         
+
+
+
+
+        //INSERIR AQUI O COMANDO if QUE TESTA A INCOMPATIBILIDADE DE HORÁRIO FINAL DA RESERVA (COPIAR LÁ DO FINAL)
+
+
+
+
+
         function diaDaSemanaPorExtenso(dataFinal) { //função (dentro da função) para transformar o número do dia da semana em texto
                 const diasDaSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
                 return diasDaSemana[diaSem]; //diaSem é um número de 0 a 6 dado por getDay
