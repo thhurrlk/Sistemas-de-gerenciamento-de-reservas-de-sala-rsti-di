@@ -1,0 +1,44 @@
+function objectToPlaintext(obj, indent = 0) {
+    const indentation = '  '.repeat(indent);
+    let plaintext = '';
+
+    for (const key in obj) {
+        if (Array.isArray(obj[key])) {
+            plaintext += `${indentation}${key}:\n`;
+            obj[key].forEach((item) => {
+                if (typeof item === 'object') {
+                    plaintext += objectToPlaintext(item, indent + 1);
+                } else {
+                    plaintext += `${indentation}  - ${item}\n`;
+                }
+            });
+        } else if (typeof obj[key] === 'object') {
+            plaintext += `${indentation}${key}:\n`;
+            plaintext += objectToPlaintext(obj[key], indent + 1);
+        } else {
+            plaintext += `${indentation}${key}: ${obj[key]}\n`;
+        }
+    }
+
+    return plaintext;
+}
+
+// Example usage:
+const obj = {
+    name: 'John Doe',
+    age: 30,
+    address: {
+        street: '123 Main St',
+        city: 'Anytown',
+        country: 'USA'
+    },
+    hobbies: ['Reading', 'Hiking'],
+    friends: [
+        { name: 'Alice', age: 28 },
+        { name: 'Bob', age: 32 }
+    ]
+};
+
+const plaintext = objectToPlaintext(obj);
+console.log(plaintext);
+
